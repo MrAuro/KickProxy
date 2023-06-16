@@ -1,0 +1,17 @@
+{
+  "name": "kickproxy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Auro <35087590+MrAuro@users.noreply.github.com>",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "@types/ws": "^8.5.5",
+    "ws": "^8.13.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node kick_chat.js",
+    "dev": "ts-node ."
+  }
+}
