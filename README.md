@@ -22,6 +22,8 @@ so the provided channel for the IRC connection does nothing. Meant to be used in
 6. Run `npm start`
 7. Add a new IRC connection in Chatterino with the following settings:
 
+   **MAKE SURE SSL IS UNCHECKED**
+
    ![image](chatterino.png)
 
 ---
