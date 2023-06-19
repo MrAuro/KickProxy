@@ -1,6 +1,11 @@
 import WebSocket from "ws";
 import net from "net";
 
+const SERVER_PORT = 8080;
+const SERVER_HOST = "localhost";
+const USER_ID = "668";
+const USER_LOGIN = "xqc";
+
 const socket = new WebSocket(
   "wss://ws-us2.pusher.com/app/eb1d5f283081a78b932c?protocol=7&client=js&version=7.6.0&flash=false"
 );
@@ -27,13 +32,10 @@ socket.addEventListener("close", () => {
   console.log("WebSocket connection closed");
 });
 
-const serverPort = 8080;
-const serverHost = 'localhost';
-
 const ircServer = net.createServer(handleClientConnect);
 
 // Start listening for incoming connections
-ircServer.listen(serverPort, serverHost, () => {
+ircServer.listen(SERVER_PORT, SERVER_HOST, () => {
   console.log(`IRC server running on ${serverHost}:${serverPort}`);
 });
 
@@ -44,9 +46,14 @@ function handleMessage(event) {
   if (messageData?.type === "message") {
     const content = messageData.content;
     const pattern = /\[emote:\d+:(\w+)\]/g;
-    const outputString = content.replace(pattern, (_, captureGroup) => captureGroup);
+    const outputString = content.replace(
+      pattern,
+      (_, captureGroup) => captureGroup
+    );
 
-    broadcast(`:${messageData.sender.username} PRIVMSG #xqc :${outputString}\r\n`);
+    broadcast(
+      `:${messageData.sender.username} PRIVMSG #${USER_LOGIN} :${outputString}\r\n`
+    );
   }
 
   if (state === 0) {
@@ -54,7 +61,7 @@ function handleMessage(event) {
       JSON.stringify({
         event: "pusher:subscribe",
         data: {
-          channel: "chatrooms.668.v2",
+          channel: `chatrooms.${USER_ID}.v2`,
           auth: null,
         },
       })
@@ -64,7 +71,9 @@ function handleMessage(event) {
 }
 
 function handleClientConnect(socket) {
-  console.log(`New client connected: ${socket.remoteAddress}:${socket.remotePort}`);
+  console.log(
+    `New client connected: ${socket.remoteAddress}:${socket.remotePort}`
+  );
 
   const client = {
     socket,
@@ -75,16 +84,16 @@ function handleClientConnect(socket) {
 
   client.socket.write(`Connected to proxy, ${client.nick}!\n`);
 
-  client.socket.on('data', () => null);
+  client.socket.on("data", () => null);
 
-  client.socket.on('end', () => {
+  client.socket.on("end", () => {
     console.log(`Client disconnected: ${client.nick}`);
     const index = clients.indexOf(client);
     if (index !== -1) {
       clients.splice(index, 1);
     }
 
-    Object.values(channels).forEach(channel => {
+    Object.values(channels).forEach((channel) => {
       const memberIndex = channel.members.indexOf(client);
       if (memberIndex !== -1) {
         channel.members.splice(memberIndex, 1);
@@ -94,7 +103,7 @@ function handleClientConnect(socket) {
 }
 
 function broadcast(message) {
-  clients.forEach(client => {
+  clients.forEach((client) => {
     client.socket.write(message);
   });
 }
