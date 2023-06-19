@@ -36,7 +36,7 @@ const ircServer = net.createServer(handleClientConnect);
 
 // Start listening for incoming connections
 ircServer.listen(SERVER_PORT, SERVER_HOST, () => {
-  console.log(`IRC server running on ${serverHost}:${serverPort}`);
+  console.log(`IRC server running on ${SERVER_HOST}:${SERVER_PORT}`);
 });
 
 function handleMessage(event) {
