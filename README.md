@@ -19,7 +19,7 @@ so the provided channel for the IRC connection does nothing. Meant to be used in
 3. Extract the zip file
 4. Open a terminal in the extracted folder
 5. Run `npm install`
-6. Run `node index.js`
+6. Run `npm start`
 7. Add a new IRC connection in Chatterino with the following settings:
 
    ![image](chatterino.png)
