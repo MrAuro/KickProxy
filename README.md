@@ -3,7 +3,7 @@
 Scuffed IRC Kick Proxy. Only supports reading messages and **not sending** them. xQc's stream is hardcoded in,
 so the provided channel for the IRC connection does nothing. Meant to be used in Chatterino:
 
-## Want to be notified when xQc goes live on Kick in Chatterino? [Add OuraBot for free!](https://ourabot.com) (made by the same developer as KickProxy)
+## Want to be notified when xQc goes live on Kick in Chatterino? [Add OuraBot for free!](https://ourabot.com)
 
 ![ourabot](bot.png)
 
