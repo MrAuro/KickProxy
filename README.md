@@ -35,3 +35,7 @@ so the provided channel for the IRC connection does nothing. Meant to be used in
 3. Make sure you have the correct settings in Chatterino (see above)
 4. If you stop recieving messages, restart the proxy and reconnect in Chatterino with CTRL + F5
 5. Join my Discord [here](https://discord.gg/ZHqpuszdaM)
+
+## I can't see emotes
+
+Unfortunately Chatterino's IRC channels do not allow for emotes (https://github.com/Chatterino/chatterino2/issues/1378), so Kick and 7TV emotes cannot be  viewed through the proxy
